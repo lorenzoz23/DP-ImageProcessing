@@ -7,10 +7,8 @@ import pa2.MatrixCuts;
 
 /**
  * 
- * @author Lorenzo Zenitsky, Gabrielle Johnston
- * 
- *         Use this program two stich images. Makes calls to stitch cut method
- *         from the class MatxiCuts.
+ * Use this program two stitch images. Makes calls to stitch cut method
+ * from the class MatxiCuts.
  *
  */
 public class ImageStitch {
