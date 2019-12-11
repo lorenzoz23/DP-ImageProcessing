@@ -12,14 +12,18 @@ public class TestCuts {
 				{50, 51, 25, 26, 1}};
 		
 		ArrayList<Tuple> arr = new ArrayList<Tuple>();
+		ArrayList<Tuple> stitch = new ArrayList<Tuple>();
 		arr = MatrixCuts.widthCut(M);
 		
 //		for(int i=0; i<arr.size(); i++) {
 //			System.out.println(arr.get(i).toString());
 //		}
-		System.out.print(arr.toString());
+		System.out.println(arr.toString());
 		
+//		stitch = MatrixCuts.stitchCut(M);
 		
+//		System.out.println(stitch.toString());
+//		System.out.println("Done with main");
 	}
 
 
