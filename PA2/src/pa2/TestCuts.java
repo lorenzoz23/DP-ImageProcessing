@@ -14,9 +14,10 @@ public class TestCuts {
 		ArrayList<Tuple> arr = new ArrayList<Tuple>();
 		arr = MatrixCuts.widthCut(M);
 		
-		for(int i=0; i<arr.size(); i++) {
-			System.out.println(arr.get(i).toString());
-		}
+//		for(int i=0; i<arr.size(); i++) {
+//			System.out.println(arr.get(i).toString());
+//		}
+		System.out.print(arr.toString());
 		
 		
 	}
