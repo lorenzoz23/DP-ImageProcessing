@@ -28,8 +28,8 @@ public class MatrixCuts {
 		int col = 0;
 		
 		// initialize first col of paths
-		for (int j = 0; j < M.length; j++) {
-			paths[j][0] = new Tuple(j, 0);
+		for (int j = 0; j < M[0].length; j++) {
+			paths[j][0] = new Tuple(0, j);
 			cost[j] = M[0][j];
 		}
 
@@ -142,8 +142,14 @@ public class MatrixCuts {
 	 */
 	private static int min(int a, int b, int c) {
 		if (a == b) {
+			if(a>c) {
+				return c;
+			}
 			return a;
 		} else if (a == c) {
+			if(a>b) {
+				return b;
+			}
 			return a;
 		}
 		if (b == c) {
