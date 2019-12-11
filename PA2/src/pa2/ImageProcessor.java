@@ -12,23 +12,48 @@ public class ImageProcessor {
 	private static Picture picture;
 	private static Pixel[][] M;
 	
-	static Picture reduceWidth(int x, String inputImage) {
-		picture = new Picture(inputImage);
+	public static Picture reduceWidth(int x, String inputImage) {
+		//picture = new Picture(inputImage);
+		picture = new Picture("http://web.cs.iastate.edu/~smkautz/cs311f19/temp3/test6x5.png");
 		fillImageMatrix();
-		
+		printOutImageMatrix();
 		for(int i = 0; i < x; i++) {
 			int[][] importanceArr = new int[picture.height()][picture.width() - i];
 			findImportance(importanceArr);
 			ArrayList<Tuple> minCut = MatrixCuts.widthCut(importanceArr);
 			for(int j = 0; j < picture.height(); j++) {
-				M[j][minCut.get(j).getY()] = null;
+				M[j][minCut.get(j + 1).getY()] = null;
 			}
 		}
-		
+		printOutImageMatrix();
+		updateImageMatrix(x);
 		return picFromMatrix(x);
 	}
 	
+	private static void updateImageMatrix(int x) {
+		Pixel[][] tmp = new Pixel[M.length][M[0].length - x];
+		
+		for(int i = 0; i < tmp.length; i++) {
+			for(int j = 0; j < tmp[0].length; j++) {
+				if(M[i][j] != null) {
+					tmp[i][j] = M[i][j];
+				}
+			}
+		}
+		M = tmp;
+	}
+	
+	private static void printOutImageMatrix() {
+		for(int i = 0; i < M.length; i++) {
+			for(int j = 0; j < M[0].length; j++) {
+				System.out.print(M[i][j]);
+			}
+			System.out.println();
+		}
+	}
+	
 	private static void fillImageMatrix() {
+		M = new Pixel[picture.height()][picture.width()];
 		for(int i = 0; i < M.length; i++) {
 			for(int j = 0; j < M[0].length; j++) {
 				int rgb[] = getRGBValues(picture.getRGB(j, i));
@@ -93,5 +118,9 @@ public class ImageProcessor {
 	private static int getRGBValuesFromPixel(Pixel p) {
 		int rgb = p.getR() + p.getG() + p.getB();
 		return rgb;
+	}
+	
+	public static void main(String[] args) {
+		ImageProcessor.reduceWidth(1, "http://web.cs.iastate.edu/~smkautz/cs311f19/temp3/test6x5.png");
 	}
 }

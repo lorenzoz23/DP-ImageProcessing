@@ -10,19 +10,17 @@ import java.util.ArrayList;
 
 public class MatrixCuts {
 
-
 	/*
-	 * Returns the min-cost width cut of M and its cost. 
-	 * The return type is an arraylist of Tuples. First entry 
-	 * of this list is a tuple of the form <x−1>, where x is the 
-	 * cost of the min-cost width cut. Rest of the tuples represent 
+	 * Returns the min-cost width cut of M and its cost. The return type is an
+	 * arraylist of Tuples. First entry of this list is a tuple of the form <x - 1>,
+	 * where x is the cost of the min-cost width cut. Rest of the tuples represent
 	 * the min cost width cut.
 	 */
 	public static ArrayList<Tuple> widthCut(int[][] M) {
 		Tuple[][] paths = new Tuple[M.length][M[0].length];
 		int[] cost = new int[M[0].length];
 		Tuple first = new Tuple(0, 0);
-		Tuple add; 
+		Tuple add;
 		ArrayList<Tuple> minWidthCut = new ArrayList<Tuple>();
 		int min = 0;
 		int count = -1;
@@ -108,14 +106,15 @@ public class MatrixCuts {
 		// add = new Tuple(-1, cost);
 		// minWidthCut.add(0, add);
 
+
 		return minWidthCut;
 	}
 
 	/*
 	 * Return the min-cost stitch cut of M and its cost. The return type is an
-	 * ArrayList of Tuples (ArrayList). First entry of this list is a tuple of
-	 * the form <x − 1>, where x is the cost of the min-cost stitch cut. Rest of
-	 * the tuples represent the min cost stitch cut
+	 * ArrayList of Tuples (ArrayList). First entry of this list is a tuple of the
+	 * form <x − 1>, where x is the cost of the min-cost stitch cut. Rest of the
+	 * tuples represent the min cost stitch cut
 	 */
 	public static ArrayList<Tuple> stitchCut(int[][] M) {
 		// TODO
