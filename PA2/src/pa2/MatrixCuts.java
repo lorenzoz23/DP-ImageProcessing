@@ -17,7 +17,7 @@ public class MatrixCuts {
 	 * the min cost width cut.
 	 */
 	public static ArrayList<Tuple> widthCut(int[][] M) {
-		Tuple[][] paths = new Tuple[M.length][M[0].length];
+		Tuple[][] paths = new Tuple[M.length][M[0].length+1];
 		int[] cost = new int[M[0].length];
 		Tuple first = new Tuple(0, 0);
 		Tuple add;
@@ -107,6 +107,8 @@ public class MatrixCuts {
 		// minWidthCut.add(0, add);
 
 
+		System.out.println(minWidthCut.toString());
+		
 		return minWidthCut;
 	}
 
