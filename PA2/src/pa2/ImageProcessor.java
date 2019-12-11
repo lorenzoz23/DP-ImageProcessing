@@ -31,13 +31,19 @@ public class ImageProcessor {
 	}
 	
 	private static void updateImageMatrix(int x) {
-		Pixel[][] tmp = new Pixel[M.length][M[0].length - x];
-		
-		for(int i = 0; i < tmp.length; i++) {
-			for(int j = 0; j < tmp[0].length; j++) {
+		Pixel[][] tmp = new Pixel[M.length][M[0].length];
+		int nCount = 0;
+		int j = 0;
+		for(int i = 0; i < M.length; i++) {
+			nCount = 0;
+			for(j = 0; j < M[0].length; j++) {
 				if(M[i][j] != null) {
-					tmp[i][j] = M[i][j];
+					tmp[i][j - nCount] = M[i][j];
 				}
+				else nCount++;
+			}
+			for(int k = 0; k < nCount; k++) {
+				tmp[i][j - nCount + k] = null;
 			}
 		}
 		M = tmp;
@@ -66,9 +72,9 @@ public class ImageProcessor {
 		Picture newPic = new Picture(picture.width() - x, picture.height());
 		
 		for(int i = 0; i < M.length; i++) {
-			for(int j = 0; j < M[0].length; j++) {
+			for(int j = 0; j < M[0].length - 1; j++) {
 				if(M[i][j] != null) {
-					newPic.setRGB(j, i, getRGBValuesFromPixel(M[i][j]));
+					newPic.setRGB(j, i, getRGBValuesFromPixel(M[i][j]));	
 				}
 			}
 		}
@@ -110,13 +116,13 @@ public class ImageProcessor {
 		
 		values[0] = (rgb >> 16) & 0xff;
 		values[1] = (rgb >> 8) & 0xff;
-		values[2] = (rgb) & 0xff; // or (rgb >> 0)
+		values[2] = (rgb) & 0xff;
 		
 		return values;
 	}
 	
 	private static int getRGBValuesFromPixel(Pixel p) {
-		int rgb = p.getR() + p.getG() + p.getB();
+		int rgb = 0x10000 * p.getR() + 0x100 * p.getG() + p.getB();
 		return rgb;
 	}
 	
