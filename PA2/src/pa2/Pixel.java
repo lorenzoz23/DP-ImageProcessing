@@ -30,5 +30,11 @@ public class Pixel {
 	public int getB() {
 		return b;
 	}
+	
+	@Override
+	public String toString() {
+		String s = "< " + getR() + " " + getG() + " " + getB() + " >";
+		return s;
+	}
 
 }
