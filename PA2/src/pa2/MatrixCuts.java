@@ -17,10 +17,8 @@ public class MatrixCuts {
 	 * the min cost width cut.
 	 */
 	public static ArrayList<Tuple> widthCut(int[][] M) {
-		Tuple[][] paths = new Tuple[M.length][M[0].length+1];
+		Tuple[][] paths = new Tuple[M[0].length][M.length];
 		int[] cost = new int[M[0].length];
-		Tuple first = new Tuple(0, 0);
-		Tuple add;
 		ArrayList<Tuple> minWidthCut = new ArrayList<Tuple>();
 		int min = 0;
 		int count = -1;
@@ -47,18 +45,12 @@ public class MatrixCuts {
 					} 
 					else if (col - 1 < 0) {
 						min = min(M[row + 1][col + 1], M[row + 1][col]);
-						// col=col+1;
 					} 
 					else {
 						min = min(M[row + 1][col + 1], M[row + 1][col], M[row + 1][col - 1]);
 					}
 
 					cost[count] = cost[count] + min;
-					// System.out.println("Cost of row: "+row+", col:
-					// "+col);
-					// System.out.println(M[row+1][col+1]);
-					// System.out.println(M[row+1][col]);
-					// System.out.println(M[row+1][col-1]);
 
 					if (M[row + 1][col + 1] == min) {
 						paths[i][j] = new Tuple(row + 1, col + 1);
@@ -74,7 +66,6 @@ public class MatrixCuts {
 						row = row + 1;
 						col = col - 1;
 					}
-
 				} 
 				catch (ArrayIndexOutOfBoundsException e) {
 					if (col > M[0].length) {
@@ -83,9 +74,7 @@ public class MatrixCuts {
 					else if (col < 0) {
 						col++;
 					}
-
 				}
-
 			}
 		}
 		min = cost[0]+1;
@@ -101,13 +90,6 @@ public class MatrixCuts {
 		for(int k=0; k<paths[0].length; k++) {
 			minWidthCut.add(paths[count][k]);
 		}
-
-		// System.out.println("Final cost is " + cost);
-		// add = new Tuple(-1, cost);
-		// minWidthCut.add(0, add);
-
-
-		System.out.println(minWidthCut.toString());
 		
 		return minWidthCut;
 	}
