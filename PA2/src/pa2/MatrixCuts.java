@@ -11,11 +11,15 @@ import java.util.LinkedList;
 
 public class MatrixCuts {
 
-	/*
+
+	/**
 	 * Returns the min-cost width cut of M and its cost. The return type is an
 	 * arraylist of Tuples. First entry of this list is a tuple of the form <x - 1>,
 	 * where x is the cost of the min-cost width cut. Rest of the tuples represent
 	 * the min cost width cut.
+	 * @param M - given array of ints that represents costs
+	 * @return ArrayList of Tuples with the first being the cost and rest being the
+	 * 			minimum cost path for widthCut
 	 */
 	public static ArrayList<Tuple> widthCut(int[][] M) {
 		Tuple[][] paths = new Tuple[M[0].length][M.length];
@@ -94,11 +98,16 @@ public class MatrixCuts {
 		return minWidthCut;
 	}
 
-	/*
+
+	/**
 	 * Return the min-cost stitch cut of M and its cost. The return type is an
 	 * ArrayList of Tuples (ArrayList). First entry of this list is a tuple of the
 	 * form <x − 1>, where x is the cost of the min-cost stitch cut. Rest of the
 	 * tuples represent the min cost stitch cut
+	 * 
+	 * @param M - given array of ints that represents costs
+	 * @return ArrayList of Tuples with the first being the cost and rest being the
+	 * 			minimum cost path for stitchCut
 	 */
 	public static ArrayList<Tuple> stitchCut(int[][] M) {
 		LinkedList<Tuple>[] paths = new LinkedList[M[0].length];
@@ -116,15 +125,12 @@ public class MatrixCuts {
 			cost[i] = M[0][i];
 		}
 		
-		int withZ = M[0].length;
-		int without = M.length;
-		
 		// finds the width cut
 		for (int i = 0; i < M[0].length; i++) {
 			count++;
 			row = 0;
 			col = i;
-			for (int j = 1; row < M[0].length-1; j++) {
+			while(row < M[0].length-1) {
 				try {
 					if (col + 1 >= M[0].length) {
 						min = M[row + 1][col];
@@ -163,10 +169,6 @@ public class MatrixCuts {
 				}
 			}
 		}
-
-		for(int t=0; t<paths.length; t++) {
-			System.out.println(paths[t]);
-		}
 		
 		min = cost[0]+1;
 		count = 0;
@@ -182,16 +184,14 @@ public class MatrixCuts {
 			minWidthCut.add(temp);
 		}
 
-	
-
 		return minWidthCut;
 	}
 
 	/**
 	 * Returns the minimum of two numbers.
 	 * 
-	 * @param a
-	 * @param b
+	 * @param a input int
+	 * @param b input int
 	 * @return the minimum of two numbers.
 	 */
 	private static int min(int a, int b) {
@@ -199,11 +199,13 @@ public class MatrixCuts {
 	}
 
 	/**
-	 * Returns the minimum of three numbers.
+	 * Returns the minimum of three numbers, giving 
+	 * priority to the first, then second, and lastly
+	 * third.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param c
+	 * @param a input int, first priority
+	 * @param b input int, second priority
+	 * @param c input int, third priority
 	 * @return the minimum of the three parameters.
 	 */
 	private static int min(int a, int b, int c) {
