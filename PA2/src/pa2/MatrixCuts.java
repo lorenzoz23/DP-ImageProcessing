@@ -1,6 +1,7 @@
 package pa2;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * 
@@ -32,7 +33,6 @@ public class MatrixCuts {
 		}
 
 		// finds the width cut
-		// need to add checks for going out of bounds
 		for (int i = 0; i < M[0].length; i++) {
 			count++;
 			row = 0;
@@ -101,8 +101,90 @@ public class MatrixCuts {
 	 * tuples represent the min cost stitch cut
 	 */
 	public static ArrayList<Tuple> stitchCut(int[][] M) {
-		// TODO
-		return new ArrayList<Tuple>();
+		LinkedList<Tuple>[] paths = new LinkedList[M[0].length];
+		ArrayList<Tuple> minWidthCut = new ArrayList<Tuple>();
+		int[] cost = new int[M[0].length];
+		int count = -1;
+		int row;
+		int col;
+		int min;
+		
+		
+		for(int i=0; i<paths.length; i++) {
+			paths[i] = new LinkedList<Tuple>();
+			paths[i].add(new Tuple(0, i));
+			cost[i] = M[0][i];
+		}
+		
+		int withZ = M[0].length;
+		int without = M.length;
+		
+		// finds the width cut
+		for (int i = 0; i < M[0].length; i++) {
+			count++;
+			row = 0;
+			col = i;
+			for (int j = 1; row < M[0].length-1; j++) {
+				try {
+					if (col + 1 >= M[0].length) {
+						min = M[row + 1][col];
+						col = col - 1;
+					} 
+					else if (col - 1 < 0) {
+						min = min(M[row + 1][col + 1], M[row + 1][col]);
+					} 
+					else {
+						min = min(M[row + 1][col + 1], M[row + 1][col], M[row][col + 1]);
+					}
+
+					cost[count] = cost[count] + min;
+
+					if (M[row + 1][col + 1] == min) {
+						paths[i].add(new Tuple(row + 1, col + 1));
+						row = row + 1;
+						col = col + 1;
+					} 
+					else if (M[row + 1][col] == min) {
+						paths[i].add(new Tuple(row + 1, col));
+						row = row + 1;
+					} 
+					else {
+						paths[i].add(new Tuple(row, col + 1));
+						col = col + 1;
+					}
+				} 
+				catch (ArrayIndexOutOfBoundsException e) {
+					if (col > M[0].length) {
+						col--;
+					} 
+					else if (col < 0) {
+						col++;
+					}
+				}
+			}
+		}
+
+		for(int t=0; t<paths.length; t++) {
+			System.out.println(paths[t]);
+		}
+		
+		min = cost[0]+1;
+		count = 0;
+		for (int i = 0; i < cost.length; i++) {
+			if(min>cost[i]) {
+				min = cost[i];
+				count = i;
+			}
+		}
+
+		minWidthCut.add(new Tuple(min, -1));
+		for(Tuple temp : paths[count]) {
+			minWidthCut.add(temp);
+		}
+
+	
+
+		return minWidthCut;
 	}
 
 	/**

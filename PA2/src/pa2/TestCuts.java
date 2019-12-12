@@ -21,18 +21,21 @@ public class TestCuts {
 		ArrayList<Tuple> arr = new ArrayList<Tuple>();
 		ArrayList<Tuple> arr2 = new ArrayList<Tuple>();
 		ArrayList<Tuple> stitch = new ArrayList<Tuple>();
+		ArrayList<Tuple> stitch2 = new ArrayList<Tuple>();
 		arr = MatrixCuts.widthCut(M);
 		arr2 = MatrixCuts.widthCut(M2);
 		
 //		for(int i=0; i<arr.size(); i++) {
 //			System.out.println(arr.get(i).toString());
 //		}
-		System.out.println(arr.toString());
-		System.out.println(arr2.toString());
-		
+//		System.out.println(arr.toString());
+//		System.out.println(arr2.toString());
+	
 //		stitch = MatrixCuts.stitchCut(M);
+		stitch2 = MatrixCuts.stitchCut(M2);
 		
 //		System.out.println(stitch.toString());
+		System.out.println(stitch2.toString());
 //		System.out.println("Done with main");
 	}
 
