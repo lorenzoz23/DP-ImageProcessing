@@ -125,7 +125,7 @@ public class MatrixCuts {
 			row = 0;
 			col = i;
 
-			while (row < M[0].length - 1) {
+			while (row < M.length - 1) {
 
 				try {
 					if (col + 1 >= M[0].length) {
